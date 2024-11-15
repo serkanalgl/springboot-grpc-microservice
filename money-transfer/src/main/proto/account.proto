@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package grpc.account;
+
+option java_multiple_files = true;
+option java_package = "com.github.serkanalgl.banking.grpc.account";
+
+enum AccountType {
+  SAVINGS_ACCOUNT = 0;
+  FIXED_DEPOSIT = 1;
+  LOAN_ACCOUNT = 2;
+}
+
+enum AccountStatus {
+  PENDING = 0;
+  ACTIVE = 1;
+  BLOCKED = 2;
+  CLOSED = 3;
+}
+
+message CreateAccountRequest{
+  string accountName=1;
+  AccountType accountType=2;
+  string currencyCode=3;
+  uint32 customerId=4;
+  uint32 branchId=5;
+}
+
+message AccountResponse{
+  uint64 accountId=1;
+  string accountName=2;
+  string accountNumber=3;
+  AccountType accountType=4;
+  AccountStatus accountStatus=5;
+  double availableBalance = 6;
+  uint32 customerId=7;
+  uint32 branchId=8;
+}
+
+message GetAccountRequest{
+  string accountNumber=1;
+}
+
+service AccountService {
+  rpc createAccount(CreateAccountRequest) returns (AccountResponse) {}
+  rpc getAccount(GetAccountRequest) returns (AccountResponse) {}
+}
+

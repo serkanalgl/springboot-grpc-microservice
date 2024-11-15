@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpc.moneytransfer;
+
+option java_multiple_files = true;
+option java_package = "com.github.serkanalgl.banking.grpc.moneytransfer";
+
+message MoneyTransferRequest{
+  string fromAccount = 1;
+  string toAccount = 2;
+  double amount = 3;
+}
+
+message MoneyTransferResponse{
+  string fromAccount = 1;
+  string toAccount = 2;
+  double amount = 3;
+  string transactionReference = 4;
+  uint64 transferAt = 5;
+}
+
+service MoneyTransferService {
+  rpc transfer(MoneyTransferRequest) returns (MoneyTransferResponse) {}
+}

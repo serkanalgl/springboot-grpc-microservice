@@ -1,0 +1,25 @@
+grpc:
+  server:
+    port: 8091
+  client:
+    account:
+      address: localhost:8090
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+spring:
+  application:
+    name: money-transfer
+  datasource:
+    url: jdbc:postgresql://localhost:5432/moneytransfer
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
